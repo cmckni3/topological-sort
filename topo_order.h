@@ -1,7 +1,8 @@
 #include <iostream>
 #include <fstream>
-#include <queue>
 #include <string>
+
+#define DEBUG if(false)
 
 using namespace std;
 
@@ -17,21 +18,26 @@ class TopoOrder
         friend class TopoOrder;
         int inDegree,
             outDegree,
-            adjNodes[];
+            *adjNodes;
         Node();
-        Node(int cOutDegree);
+        ~Node();
+        // Node(int cOutDegree);
     };
     TopoOrder();
     TopoOrder(std::string datafile);
+    ~TopoOrder();
   private:
     int numNodes;
+    int topoCount;
     Node *nodes;
-    int topoOrder[];
+    int *topoOrder;
 
     void readDigraphAndComputeIndegrees(std::string datafile);
     void computeTopoOrder();
+    void printNodes();
     void printOutDegree();
     void printInDegree();
+    void printTopOrder();
 };
 
 #endif
