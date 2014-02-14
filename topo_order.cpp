@@ -6,15 +6,8 @@ TopoOrder::Node::Node()
 
 TopoOrder::Node::~Node()
 {
+  delete adjNodes;
 }
-
-// TopoOrder::Node::Node(int cOutDegree)
-// {
-//   outDegree = cOutDegree;
-//   inDegree = 0;
-//   for (int i = 0; i < outDegree; i++)
-//     adjNodes[i] = 0;
-// }
 
 TopoOrder::TopoOrder()
 {
@@ -24,20 +17,22 @@ TopoOrder::TopoOrder(std::string datafile)
 {
   topoCount = 0;
   readDigraphAndComputeIndegrees(datafile);
-  printNodes();
+  DEBUG printNodes();
   DEBUG cout << "-------------------------------------------------" << endl;
   DEBUG cout << "                  Out degree" << endl;
   DEBUG printOutDegree();
   DEBUG cout << "-------------------------------------------------" << endl;
   DEBUG cout << "                  In degree" << endl;
-  printInDegree();
+  DEBUG printInDegree();
   DEBUG cout << "-------------------------------------------------" << endl;
   computeTopoOrder();
-  printTopOrder();
+  printTopoOrder();
 }
 
 TopoOrder::~TopoOrder()
 {
+  // delete nodes;
+  delete topoOrder;
 }
 
 void TopoOrder::readDigraphAndComputeIndegrees(std::string datafile)
@@ -51,6 +46,8 @@ void TopoOrder::readDigraphAndComputeIndegrees(std::string datafile)
   }
 
   inFile >> numNodes;
+  nodes = new Node[numNodes];
+  topoOrder = new int[numNodes];
   for (int i = 0; i < numNodes; i++)
   {
     int index;
@@ -116,17 +113,17 @@ void TopoOrder::printInDegree()
   }
 }
 
-void TopoOrder::printTopOrder()
+void TopoOrder::printTopoOrder()
 {
   for (int i = 0; i < numNodes; i++)
   {
-    cout << topoOrder[i] << endl;
+    cout << topoOrder[i] << " ";
   }
+  cout << endl;
 }
 
 void TopoOrder::computeTopoOrder()
 {
-  topoOrder = new int[numNodes];
   cout << "inDegrees = [";
   for (int j = 0; j < numNodes; j++)
   {

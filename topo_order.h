@@ -21,7 +21,6 @@ class TopoOrder
             *adjNodes;
         Node();
         ~Node();
-        // Node(int cOutDegree);
     };
     TopoOrder();
     TopoOrder(std::string datafile);
@@ -37,7 +36,7 @@ class TopoOrder
     void printNodes();
     void printOutDegree();
     void printInDegree();
-    void printTopOrder();
+    void printTopoOrder();
 };
 
 #endif
