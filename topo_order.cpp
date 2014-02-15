@@ -4,11 +4,6 @@ TopoOrder::Node::Node()
 {
 }
 
-TopoOrder::Node::~Node()
-{
-  delete adjNodes;
-}
-
 TopoOrder::TopoOrder()
 {
 }
@@ -31,7 +26,6 @@ TopoOrder::TopoOrder(std::string datafile)
 
 TopoOrder::~TopoOrder()
 {
-  // delete nodes;
   delete topoOrder;
 }
 
@@ -58,18 +52,19 @@ void TopoOrder::readDigraphAndComputeIndegrees(std::string datafile)
     inFile >> odegree;  // get outdegree
     inFile >> temp; // skip rparen
 
-    nodes[index] = Node();
-    nodes[index].outDegree = odegree;
-    nodes[index].inDegree = 0;
-    nodes[index].adjNodes = new int[odegree];
+    Node node = Node();
+    node.outDegree = odegree;
+    node.inDegree = 0;
+    node.adjNodes = new int[odegree];
 
     // Read edges
     for (int j = 0; j < odegree; j++)
     {
       int adegree;
       inFile >> adegree;
-      nodes[index].adjNodes[j] = adegree;
+      node.adjNodes[j] = adegree;
     }
+    nodes[index] = node;
   }
   for (int i = 0; i < numNodes; i++)
   {
@@ -153,16 +148,16 @@ void TopoOrder::computeTopoOrder()
     // root node index
     int index = stack[--stackSize];
     // pop
-    Node root = nodes[index];
+    Node *root = &nodes[index];
     topoOrder[topoCount++] = index;
 
-    for (int k = 0; k < root.outDegree; k++)
+    for (int k = 0; k < root->outDegree; k++)
     {
-      Node *adjNode = &nodes[root.adjNodes[k]];
+      Node *adjNode = &nodes[root->adjNodes[k]];
       adjNode->inDegree--;
       if (adjNode->inDegree == 0)
       {
-        stack[stackSize++] = root.adjNodes[k];
+        stack[stackSize++] = root->adjNodes[k];
       }
     }
     cout << "reduced inDegrees = [";
