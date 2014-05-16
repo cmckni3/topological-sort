@@ -1,6 +1,6 @@
 var exec = require('child_process').exec;
 
-var sh = require('execSync').run;
+var sh = require('execSync').exec;
 
 var fs = require('fs');
 
@@ -21,18 +21,18 @@ reduced inDegrees = [0 0 0 0 0 0 0 0 ]\n\
 
 var assert = require("assert");
 
-describe('Array', function(){
-  describe('#indexOf()', function(){
-    it('should return -1 when the value is not present', function(done){
-      exec('make clean && make', function(err, stdout, stderr)
-      {
-        exec('./tsort', function(err, stdout, stderr)
-        {
-          // assert.ok(stdout == solution1 || stdout == solution2);
-          assert.equal(stdout, solution1);
-          done();
-        });
-      });
+describe('Topological Sort', function(){
+  it('should compile', function(){
+    sh('make clean && make');
+    fs.existsSync('./tsort');
+    assert.ok(fs.existsSync('./tsort'));
+  });
+  it('should topologically sort', function(done){
+    exec('./tsort', function(err, stdout, stderr)
+    {
+      // assert.ok(stdout == solution1 || stdout == solution2);
+      assert.equal(stdout, solution1);
+      done();
     });
   });
 });
