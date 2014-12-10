@@ -1,25 +1,12 @@
-var exec = require('child_process').exec;
-
-var sh = require('execSync').exec;
-
-var fs = require('fs');
+var assert = require("assert");
+var exec   = require('child_process').exec;
+var sh     = require('execSync').exec;
+var fs     = require('fs');
+var path   = require('path');
 
 // TODO: Sample input actually has another possible 
 // sort order. Need to take this into account in the test
-var solution1 = "inDegrees = [0 0 1 2 1 2 2 1 ]\n\
-Nodes with inDegree 0 [0, 1, ]\n\
-reduced inDegrees = [0 0 1 1 0 2 2 1 ]\n\
-reduced inDegrees = [0 0 1 1 0 1 2 1 ]\n\
-reduced inDegrees = [0 0 0 0 0 1 2 1 ]\n\
-reduced inDegrees = [0 0 0 0 0 0 1 0 ]\n\
-reduced inDegrees = [0 0 0 0 0 0 1 0 ]\n\
-reduced inDegrees = [0 0 0 0 0 0 0 0 ]\n\
-reduced inDegrees = [0 0 0 0 0 0 0 0 ]\n\
-reduced inDegrees = [0 0 0 0 0 0 0 0 ]\n\
-1 4 0 3 7 5 6 2 \n\
-";
-
-var assert = require("assert");
+var solution1 = fs.readFileSync(path.resolve(__dirname, 'fixtures', 'solution1.txt'), 'UTF8');
 
 describe('Topological Sort', function(){
   it('should compile', function(){
@@ -36,3 +23,4 @@ describe('Topological Sort', function(){
     });
   });
 });
+
