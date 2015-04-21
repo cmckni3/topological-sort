@@ -14,7 +14,10 @@ describe('Topological Sort', function(){
     async.series([
       function(cb) {
         exec('make clean && make', function(err, stdout, stderr){
-          if (err) return cb(err, null);
+          if (err)
+          {
+            return cb(err, null);
+          }
           cb(null, stdout);
         });
       }
