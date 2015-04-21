@@ -128,12 +128,12 @@ void TopoOrder::printTopoOrder()
 
 void TopoOrder::computeTopoOrder()
 {
-  cout << "inDegrees = [";
+  DEBUG cout << "inDegrees = [";
   for (int j = 0; j < numNodes; j++)
   {
-    cout << nodes[j].inDegree << " ";
+    DEBUG cout << nodes[j].inDegree << " ";
   }
-  cout << "]" << endl;
+  DEBUG cout << "]" << endl;
   int stack[numNodes];
   int stackSize = 0;
   // push inDegree = 0 nodes onto stack
@@ -145,12 +145,12 @@ void TopoOrder::computeTopoOrder()
     }
   }
 
-  cout << "Nodes with inDegree 0 [";
+  DEBUG cout << "Nodes with inDegree 0 [";
   for (int j = 0; j < stackSize; j++)
   {
-    cout << stack[j] << ", ";
+    DEBUG cout << stack[j] << ", ";
   }
-  cout << "]" << endl;
+  DEBUG cout << "]" << endl;
 
   while (stackSize > 0)
   {
@@ -169,11 +169,11 @@ void TopoOrder::computeTopoOrder()
         stack[stackSize++] = root->adjNodes[k];
       }
     }
-    cout << "reduced inDegrees = [";
+    DEBUG cout << "reduced inDegrees = [";
     for (int j = 0; j < numNodes; j++)
     {
-      cout << nodes[j].inDegree << " ";
+      DEBUG cout << nodes[j].inDegree << " ";
     }
-    cout << "]" << endl;
+    DEBUG cout << "]" << endl;
   }
 }
