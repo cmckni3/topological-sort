@@ -3,13 +3,12 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
+    "build": "cd node-bindings && node-gyp configure && node-gyp build",
     "test": "mocha"
   },
   "author": "Chris McKnight",
-  "dependencies": {
-    "async": "~0.9.0"
-  },
   "devDependencies": {
+    "async": "~0.9.0",
     "mocha": "2.x"
   }
 }

@@ -3,4 +3,5 @@ a.out
 tsort
 .DS_Store
 node_modules
+node-bindings/build
 
