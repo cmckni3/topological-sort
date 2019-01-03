@@ -7,9 +7,9 @@
   },
   "author": "Chris McKnight",
   "dependencies": {
-    "async": "~0.9.0"
+    "async": "~2.6.1"
   },
   "devDependencies": {
-    "mocha": "2.x"
+    "mocha": "^5.2.0"
   }
 }
